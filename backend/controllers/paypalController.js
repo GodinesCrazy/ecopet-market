@@ -105,7 +105,7 @@ export async function confirmPayPalOrder(req, res) {
         success: true,
         orderId: capture.result.id,
         status: capture.result.status,
-        downloadUrl: product?.downloadUrl || "https://example.com/descargas/producto.pdf",
+        downloadUrl: product?.downloadUrl || "https://cdn.example.com/producto.pdf",
       });
     } else {
       res.status(400).json({

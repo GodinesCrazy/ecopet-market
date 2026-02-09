@@ -22,7 +22,7 @@ function ConfirmationContent() {
         })
         .catch(() => {
           // Fallback para demo
-          setDownloadUrl("https://example.com/descargas/producto.pdf");
+          setDownloadUrl("https://cdn.example.com/producto.pdf");
         });
     }
   }, [orderId]);

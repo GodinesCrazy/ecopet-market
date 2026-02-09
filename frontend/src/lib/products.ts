@@ -22,7 +22,7 @@ export const products: Product[] = [
     image:
       "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=1200&q=80",
     format: "PDF",
-    downloadUrl: "https://example.com/descargas/guia-perros.pdf",
+    downloadUrl: "https://cdn.example.com/guia-perros.pdf",
   },
   {
     id: "p2",
@@ -35,7 +35,7 @@ export const products: Product[] = [
     image:
       "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80",
     format: "PDF imprimible",
-    downloadUrl: "https://example.com/descargas/calendario-gatos.pdf",
+    downloadUrl: "https://cdn.example.com/calendario-gatos.pdf",
   },
   {
     id: "p3",
@@ -48,6 +48,6 @@ export const products: Product[] = [
     image:
       "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=1200&q=80",
     format: "Word (.docx)",
-    downloadUrl: "https://example.com/descargas/plantilla-salud.docx",
+    downloadUrl: "https://cdn.example.com/plantilla-salud.docx",
   },
 ];

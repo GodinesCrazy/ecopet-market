@@ -14,6 +14,12 @@ app.use(cors({
   origin: process.env.FRONTEND_URL || "http://localhost:3000",
   credentials: true,
 }));
+
+// Middleware para webhooks (debe ir antes de express.json())
+// PayPal webhook necesita raw body para verificación de firma
+app.use("/api/webhook/paypal", express.raw({ type: "application/json" }));
+
+// Middlewares generales
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

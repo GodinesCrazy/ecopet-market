@@ -1,6 +1,6 @@
 {
   "name": "ecopet-market-backend",
-  "version": "1.0.0",
+  "version": "1.0.0-release",
   "description": "Backend API for EcoPet Market - Digital products store",
   "main": "server.js",
   "type": "module",

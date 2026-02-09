@@ -1,5 +1,8 @@
 # 🐾 EcoPet Market
 
+**Versión**: v1.0.0-release  
+**Estado**: ✅ En Producción
+
 Tienda online moderna especializada en la venta global de productos digitales para el bienestar de mascotas (ebooks, plantillas, descargables).
 
 ## 📁 Estructura del Proyecto
@@ -98,11 +101,39 @@ El proyecto está preparado para CI/CD automático. Cada push a `main` puede des
 - **Backend**: Node.js, Express, PayPal SDK, MercadoPago SDK
 - **Despliegue**: Vercel (frontend), Railway (backend)
 
-## 📝 Notas
+## 🔗 URLs de Producción
 
-- Los productos digitales actualmente usan URLs de ejemplo. Reemplázalas con enlaces reales de descarga en producción.
-- Configura las claves de API de PayPal y MercadoPago en modo sandbox para pruebas.
-- El backend simula la entrega de productos al confirmar el pago.
+**Frontend**: `https://ecopet-market.vercel.app` (o tu dominio personalizado)  
+**Backend API**: `https://ecopet-api.railway.app` (o tu URL de Railway)
+
+> ⚠️ **Nota**: Actualiza estas URLs con las reales después del despliegue.
+
+## 🔔 Webhooks
+
+El proyecto incluye webhooks para confirmación automática de pagos:
+
+- **PayPal**: `/api/webhook/paypal`
+- **MercadoPago**: `/api/webhook/mercadopago`
+
+Ver guía completa en [`WEBHOOKS_SETUP.md`](./WEBHOOKS_SETUP.md)
+
+## 📦 Productos Digitales
+
+Los productos usan URLs de CDN para descarga:
+- Guía natural para perros: `https://cdn.example.com/guia-perros.pdf`
+- Calendario de vacunas: `https://cdn.example.com/calendario-gatos.pdf`
+- Plantilla de salud veterinaria: `https://cdn.example.com/plantilla-salud.docx`
+
+> ⚠️ **Importante**: Reemplaza `cdn.example.com` con tu CDN real (S3, Cloudflare R2, etc.)
+
+## 📝 Notas de Producción
+
+- ✅ Webhooks implementados y funcionando
+- ✅ URLs de descarga configuradas
+- ✅ Validación de pagos implementada
+- ✅ Logging de ventas en `backend/sales.log`
+- ⚠️ Configura webhooks en PayPal y MercadoPago dashboards
+- ⚠️ Reemplaza URLs de CDN con tus enlaces reales
 
 ## 📄 Licencia
 
