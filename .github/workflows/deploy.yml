@@ -1,0 +1,27 @@
+name: Deploy EcoPet Market
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Nota: Este workflow requiere configuración manual en Vercel y Railway
+  # para que el deploy automático funcione desde GitHub
+  
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Notify deployment
+        run: |
+          echo "🚀 Push detected to main branch"
+          echo "📦 Frontend should auto-deploy on Vercel"
+          echo "📦 Backend should auto-deploy on Railway"
+          echo ""
+          echo "⚠️  Make sure you have:"
+          echo "   1. Connected GitHub repo to Vercel (frontend/)"
+          echo "   2. Connected GitHub repo to Railway (backend/)"
+          echo "   3. Configured all environment variables in both platforms"

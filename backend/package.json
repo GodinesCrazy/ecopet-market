@@ -1,0 +1,21 @@
+{
+  "name": "ecopet-market-backend",
+  "version": "1.0.0",
+  "description": "Backend API for EcoPet Market - Digital products store",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": ["ecopet", "market", "api"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mercadopago": "^2.3.2"
+  }
+}
