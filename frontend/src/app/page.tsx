@@ -93,7 +93,7 @@ export default function Home() {
                       ${product.price.toFixed(2)}
                     </span>
                     <Link
-                      href={`/product/${product.slug}`}
+                      href={`/product/${product.id}`}
                       className="text-sm font-semibold text-emerald-700"
                     >
                       Ver detalle

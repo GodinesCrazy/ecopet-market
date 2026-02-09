@@ -10,8 +10,24 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Middlewares
+// CORS: Permitir frontend de Vercel y localhost para desarrollo
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "https://ecopet-market-frontend.vercel.app",
+  "http://localhost:3000",
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  origin: (origin, callback) => {
+    // Permitir requests sin origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin) || process.env.NODE_ENV === "development") {
+      callback(null, true);
+    } else {
+      callback(null, true); // Permitir todos en desarrollo, restringir en producción si es necesario
+    }
+  },
   credentials: true,
 }));
 

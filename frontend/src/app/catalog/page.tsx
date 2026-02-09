@@ -39,7 +39,7 @@ export default function CatalogPage() {
                 </span>
                 <div className="flex flex-col gap-2 text-sm">
                   <Link
-                    href={`/product/${product.slug}`}
+                    href={`/product/${product.id}`}
                     className="rounded-full border border-emerald-200 px-4 py-2 text-center font-semibold text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-50"
                   >
                     Ver detalle
