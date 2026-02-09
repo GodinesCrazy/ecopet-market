@@ -6,7 +6,13 @@ import { handlePayPalWebhook, handleMercadoPagoWebhook } from "../controllers/we
 
 const router = express.Router();
 
-// PayPal routes
+// POST /api/create-order/paypal - Crear orden PayPal
+router.post("/create-order/paypal", createPayPalOrder);
+
+// POST /api/create-order/mercadopago - Crear preferencia MercadoPago
+router.post("/create-order/mercadopago", createMercadoPagoOrder);
+
+// Rutas legacy (compatibilidad)
 router.get("/create-order", async (req, res) => {
   const { provider, productId, mode } = req.query;
 

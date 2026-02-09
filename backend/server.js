@@ -2,23 +2,18 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import productsRouter from "./routes/products.js";
-import paymentsRouter from "./routes/payments.js";
 import ordersRouter from "./routes/orders.js";
-import { requestLogger, errorLogger } from "./middlewares/logging.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 
 // Middlewares
 app.use(cors({
   origin: process.env.FRONTEND_URL || "http://localhost:3000",
   credentials: true,
 }));
-
-// Middleware de logging
-app.use(requestLogger);
 
 // Middleware para webhooks (debe ir antes de express.json())
 // PayPal webhook necesita raw body para verificación de firma
@@ -30,11 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/products", productsRouter);
-app.use("/api", paymentsRouter);
 app.use("/api", ordersRouter);
-
-// Error handling middleware
-app.use(errorLogger);
 
 // Health check
 app.get("/health", (req, res) => {

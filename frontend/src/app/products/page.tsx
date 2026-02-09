@@ -2,18 +2,19 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import ProductCard from "@/components/ProductCard";
+import Image from "next/image";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 interface Product {
   id: string;
   name: string;
   description: string;
   price: number;
+  currency: string;
   format: string;
-  category: string;
-  imageUrl: string;
+  image: string;
+  imageUrl?: string;
 }
 
 export default function ProductsPage() {
@@ -66,7 +67,41 @@ export default function ProductsPage() {
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <div
+            key={product.id}
+            className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md"
+          >
+            <div className="relative h-48 w-full">
+              <Image
+                src={product.imageUrl || product.image}
+                alt={product.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-1 flex-col gap-3 p-5">
+              <p className="text-xs font-semibold uppercase text-emerald-600">
+                {product.format}
+              </p>
+              <h2 className="text-lg font-semibold text-slate-900">
+                {product.name}
+              </h2>
+              <p className="text-sm text-slate-600 line-clamp-2">
+                {product.description}
+              </p>
+              <div className="mt-auto flex items-center justify-between">
+                <span className="text-lg font-semibold text-slate-900">
+                  ${product.price.toFixed(2)} {product.currency || "USD"}
+                </span>
+                <Link
+                  href={`/product/${product.id}`}
+                  className="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                >
+                  Ver detalle
+                </Link>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>

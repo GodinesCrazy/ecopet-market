@@ -12,7 +12,15 @@ const client = new MercadoPagoConfig({
 
 export async function createMercadoPagoOrder(req, res) {
   try {
-    const productId = req.productId || req.body?.productId || req.query?.productId;
+    const { productId } = req.query || req.body;
+    
+    // Validación básica
+    if (!productId || typeof productId !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID is required",
+      });
+    }
     
     const product = products.find((p) => p.id === productId);
 

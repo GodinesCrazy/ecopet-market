@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,9 +31,34 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-slate-50 text-slate-900 antialiased`}
       >
         <div className="flex min-h-screen flex-col">
-          <Navbar />
+          <header className="border-b border-slate-200 bg-white">
+            <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
+              <Link href="/" className="flex items-center gap-3">
+                <Image
+                  src="/logo.svg"
+                  alt="EcoPet Market Logo"
+                  width={120}
+                  height={36}
+                  priority
+                  className="h-9 w-auto"
+                />
+              </Link>
+              <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
+                <Link href="/products">Productos</Link>
+                <Link href="/contact">Contacto</Link>
+              </nav>
+            </div>
+          </header>
           <main className="flex-1">{children}</main>
-          <Footer />
+          <footer className="border-t border-slate-200 bg-white">
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-6 py-6 text-sm text-slate-500">
+              <span>
+                Productos digitales diseñados para el bienestar emocional y
+                saludable de tus mascotas.
+              </span>
+              <span>© 2026 EcoPet Market. Todos los derechos reservados.</span>
+            </div>
+          </footer>
         </div>
       </body>
     </html>

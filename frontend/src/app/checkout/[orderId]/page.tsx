@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 export default function CheckoutPage() {
   const params = useParams();
@@ -18,8 +18,7 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Simular verificación de pago
-    // En producción, esto debería verificar con el backend
+    // Verificar pago con el backend
     fetch(`${apiUrl}/api/confirm-payment?orderId=${orderId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -35,10 +34,21 @@ export default function CheckoutPage() {
       });
   }, [orderId]);
 
+  useEffect(() => {
+    // Si hay downloadUrl, redirigir a success
+    if (status === "success" && downloadUrl) {
+      const timer = setTimeout(() => {
+        window.location.href = `/success?downloadUrl=${encodeURIComponent(downloadUrl)}`;
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [status, downloadUrl]);
+
   if (status === "loading") {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
+          <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-emerald-600 border-r-transparent"></div>
           <p className="text-slate-600">Verificando pago...</p>
         </div>
       </div>
@@ -49,7 +59,7 @@ export default function CheckoutPage() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">Error al verificar el pago</p>
+          <p className="mb-4 text-red-600">Error al verificar el pago</p>
           <Link
             href="/products"
             className="text-emerald-600 hover:text-emerald-700"
@@ -61,11 +71,11 @@ export default function CheckoutPage() {
     );
   }
 
-  // Redirigir a success con el downloadUrl
-  if (downloadUrl) {
-    window.location.href = `/success?downloadUrl=${encodeURIComponent(downloadUrl)}`;
-    return null;
-  }
-
-  return null;
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-center">
+        <p className="text-slate-600">Redirigiendo...</p>
+      </div>
+    </div>
+  );
 }

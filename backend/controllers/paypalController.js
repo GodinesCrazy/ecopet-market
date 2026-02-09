@@ -19,7 +19,15 @@ function client() {
 
 export async function createPayPalOrder(req, res) {
   try {
-    const productId = req.productId || req.body?.productId || req.query?.productId;
+    const { productId } = req.query || req.body;
+    
+    // Validación básica
+    if (!productId || typeof productId !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID is required",
+      });
+    }
     
     const product = products.find((p) => p.id === productId);
 
@@ -48,8 +56,8 @@ export async function createPayPalOrder(req, res) {
         brand_name: "EcoPet Market",
         landing_page: "BILLING",
         user_action: "PAY_NOW",
-        return_url: `${process.env.FRONTEND_URL || "http://localhost:3000"}/confirmation?orderId={ORDER_ID}`,
-        cancel_url: `${process.env.FRONTEND_URL || "http://localhost:3000"}/catalog`,
+        return_url: `${process.env.FRONTEND_URL || "http://localhost:3000"}/checkout/{ORDER_ID}`,
+        cancel_url: `${process.env.FRONTEND_URL || "http://localhost:3000"}/products`,
       },
     });
 
