@@ -19,7 +19,7 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
-              href="/catalog"
+              href="/products"
               className="rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
             >
               Ver catálogo

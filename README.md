@@ -5,18 +5,29 @@
 
 Tienda online moderna especializada en la venta global de productos digitales para el bienestar de mascotas (ebooks, plantillas, descargables).
 
+---
+
 ## 📁 Estructura del Proyecto
 
 ```
 EcoPetMarket/
-├── frontend/          # Next.js App (Vercel)
+├── frontend/          # Next.js 14 App (Vercel)
+│   ├── src/
+│   │   ├── app/      # App Router pages
+│   │   └── components/ # Componentes reutilizables
 ├── backend/           # Express API (Railway)
+│   ├── routes/       # Rutas de la API
+│   ├── controllers/  # Controladores
+│   ├── middlewares/  # Middlewares
+│   └── data/         # Datos de productos
 └── README.md
 ```
 
+---
+
 ## 🚀 Inicio Rápido
 
-### Frontend (Next.js)
+### Frontend (Next.js 14)
 
 ```bash
 cd frontend
@@ -38,7 +49,9 @@ cp env.example .env
 npm start
 ```
 
-El servidor estará en [http://localhost:4000](http://localhost:4000)
+El servidor estará en [http://localhost:8080](http://localhost:8080)
+
+---
 
 ## 🔧 Configuración
 
@@ -47,8 +60,8 @@ El servidor estará en [http://localhost:4000](http://localhost:4000)
 Crea `frontend/.env.local`:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:4000
-# En producción: https://tu-app.railway.app
+NEXT_PUBLIC_API_URL=http://localhost:8080
+# En producción: https://ecopet-market-backend-production.up.railway.app
 ```
 
 ### Variables de Entorno Backend
@@ -56,7 +69,7 @@ NEXT_PUBLIC_API_URL=http://localhost:4000
 Crea `backend/.env`:
 
 ```env
-PORT=4000
+PORT=8080
 NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
 
@@ -69,11 +82,22 @@ PAYPAL_MODE=sandbox
 MERCADOPAGO_ACCESS_TOKEN=tu_access_token
 ```
 
-## 📦 Productos Iniciales
+---
 
-1. **Guía natural para el cuidado de perros** - $9.99 (PDF)
-2. **Calendario de vacunas para gatos** - $4.99 (PDF imprimible)
-3. **Plantilla editable de salud veterinaria** - $7.49 (Word)
+## 📦 Productos Digitales
+
+El catálogo incluye 6 productos digitales:
+
+1. Kit de Primeros Auxilios para Mascotas - $19.99
+2. Guía natural para el cuidado de perros - $9.99
+3. Calendario de vacunas para gatos - $4.99
+4. Plantilla editable de salud veterinaria - $7.49
+5. Guía completa de entrenamiento para cachorros - $14.99
+6. Recetario de nutrición natural para mascotas - $12.99
+
+Ver catálogo completo en [`PRODUCTS.md`](./PRODUCTS.md)
+
+---
 
 ## 🌐 Despliegue
 
@@ -91,49 +115,42 @@ MERCADOPAGO_ACCESS_TOKEN=tu_access_token
 3. Configura todas las variables de entorno (ver `backend/env.example`)
 4. Railway detectará automáticamente Node.js y desplegará
 
-### GitHub Actions (Opcional)
+Ver guía detallada en [`DEPLOY.md`](./DEPLOY.md)
 
-El proyecto está preparado para CI/CD automático. Cada push a `main` puede desplegar automáticamente en ambos entornos si están conectados.
+---
 
 ## 🛠️ Tecnologías
 
-- **Frontend**: Next.js 15, React, Tailwind CSS, TypeScript
+- **Frontend**: Next.js 14, React, Tailwind CSS, TypeScript
 - **Backend**: Node.js, Express, PayPal SDK, MercadoPago SDK
 - **Despliegue**: Vercel (frontend), Railway (backend)
 
+---
+
+## 📚 Documentación
+
+- [`README.md`](./README.md) - Este archivo
+- [`DEPLOY.md`](./DEPLOY.md) - Guía de despliegue
+- [`QUICK_START.md`](./QUICK_START.md) - Inicio rápido
+- [`PRODUCTS.md`](./PRODUCTS.md) - Catálogo de productos
+- [`WEBHOOKS_SETUP.md`](./WEBHOOKS_SETUP.md) - Configuración de webhooks
+
+---
+
 ## 🔗 URLs de Producción
 
-**Frontend**: `https://ecopet-market.vercel.app` (o tu dominio personalizado)  
-**Backend API**: `https://ecopet-api.railway.app` (o tu URL de Railway)
+**Frontend**: `https://ecopet.vercel.app` (o tu dominio personalizado)  
+**Backend API**: `https://ecopet-market-backend-production.up.railway.app`
 
-> ⚠️ **Nota**: Actualiza estas URLs con las reales después del despliegue.
+---
 
-## 🔔 Webhooks
+## 📝 Notas
 
-El proyecto incluye webhooks para confirmación automática de pagos:
+- Los productos digitales usan URLs de CDN. Reemplázalas con enlaces reales en producción.
+- Configura las claves de API de PayPal y MercadoPago en modo sandbox para pruebas.
+- Los webhooks validan pagos y autorizan descargas automáticamente.
 
-- **PayPal**: `/api/webhook/paypal`
-- **MercadoPago**: `/api/webhook/mercadopago`
-
-Ver guía completa en [`WEBHOOKS_SETUP.md`](./WEBHOOKS_SETUP.md)
-
-## 📦 Productos Digitales
-
-Los productos usan URLs de CDN para descarga:
-- Guía natural para perros: `https://cdn.example.com/guia-perros.pdf`
-- Calendario de vacunas: `https://cdn.example.com/calendario-gatos.pdf`
-- Plantilla de salud veterinaria: `https://cdn.example.com/plantilla-salud.docx`
-
-> ⚠️ **Importante**: Reemplaza `cdn.example.com` con tu CDN real (S3, Cloudflare R2, etc.)
-
-## 📝 Notas de Producción
-
-- ✅ Webhooks implementados y funcionando
-- ✅ URLs de descarga configuradas
-- ✅ Validación de pagos implementada
-- ✅ Logging de ventas en `backend/sales.log`
-- ⚠️ Configura webhooks en PayPal y MercadoPago dashboards
-- ⚠️ Reemplaza URLs de CDN con tus enlaces reales
+---
 
 ## 📄 Licencia
 

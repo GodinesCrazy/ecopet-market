@@ -2,6 +2,8 @@
 
 Esta guía te ayudará a desplegar EcoPet Market en Vercel (frontend) y Railway (backend).
 
+---
+
 ## 📋 Prerrequisitos
 
 1. Cuenta en [GitHub](https://github.com)
@@ -13,179 +15,161 @@ Esta guía te ayudará a desplegar EcoPet Market en Vercel (frontend) y Railway 
 
 ---
 
-## 🔧 Paso 1: Configurar GitHub
+## 🚂 Paso 1: Desplegar Backend en Railway
 
-### 1.1 Crear repositorio en GitHub
-
-```bash
-cd C:\EcoPetMarket
-git remote add origin https://github.com/TU_USUARIO/ecopet-market.git
-git branch -M main
-git push -u origin main
-```
-
-**Nota**: Crea el repositorio `ecopet-market` como **privado** en GitHub antes de hacer push.
-
----
-
-## 🌐 Paso 2: Desplegar Frontend en Vercel
-
-### 2.1 Conectar repositorio
-
-1. Ve a [Vercel Dashboard](https://vercel.com/dashboard)
-2. Click en **"Add New Project"**
-3. Importa tu repositorio `ecopet-market`
-4. Configura el proyecto:
-   - **Framework Preset**: Next.js
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build` (automático)
-   - **Output Directory**: `.next` (automático)
-
-### 2.2 Variables de entorno
-
-En la configuración del proyecto, añade:
-
-```
-NEXT_PUBLIC_API_URL=https://tu-backend.railway.app
-```
-
-**Nota**: Usa la URL de Railway que obtendrás en el paso 3.
-
-### 2.3 Deploy
-
-Vercel desplegará automáticamente. Obtendrás una URL como:
-`https://ecopet-market.vercel.app`
-
----
-
-## 🚂 Paso 3: Desplegar Backend en Railway
-
-### 3.1 Conectar repositorio
+### 1.1 Conectar Repositorio
 
 1. Ve a [Railway Dashboard](https://railway.app/dashboard)
 2. Click en **"New Project"** → **"Deploy from GitHub repo"**
 3. Selecciona tu repositorio `ecopet-market`
 4. Railway detectará automáticamente Node.js
 
-### 3.2 Configurar el proyecto
+### 1.2 Configurar Proyecto
 
-1. En la configuración del servicio, cambia:
+1. En la configuración del servicio:
    - **Root Directory**: `backend`
-   - **Start Command**: `npm start`
+   - **Start Command**: `node server.js`
+   - **Build Command**: `npm install`
 
-### 3.3 Variables de entorno
+### 1.3 Variables de Entorno
 
 Añade todas las variables en Railway:
 
 ```env
-PORT=4000
+PORT=8080
 NODE_ENV=production
-FRONTEND_URL=https://tu-frontend.vercel.app
+FRONTEND_URL=https://ecopet.vercel.app
 
-# PayPal (usa credenciales de sandbox para pruebas)
-PAYPAL_CLIENT_ID=tu_client_id_sandbox
-PAYPAL_CLIENT_SECRET=tu_client_secret_sandbox
-PAYPAL_MODE=sandbox
+# PayPal (Producción)
+PAYPAL_CLIENT_ID=tu_client_id_produccion
+PAYPAL_CLIENT_SECRET=tu_client_secret_produccion
+PAYPAL_MODE=production
 
-# MercadoPago (usa access token de prueba)
-MERCADOPAGO_ACCESS_TOKEN=tu_access_token_test
+# MercadoPago (Producción)
+MERCADOPAGO_ACCESS_TOKEN=tu_access_token_produccion
 ```
 
-### 3.4 Obtener URL de Railway
+### 1.4 Obtener URL de Railway
 
 Railway asignará una URL automáticamente, por ejemplo:
-`https://ecopet-market-production.up.railway.app`
+`https://ecopet-market-backend-production.up.railway.app`
 
-**Copia esta URL** y actualiza `NEXT_PUBLIC_API_URL` en Vercel.
-
----
-
-## 💳 Paso 4: Configurar Pagos
-
-### 4.1 PayPal
-
-1. Ve a [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/)
-2. Crea una nueva aplicación
-3. Copia `Client ID` y `Client Secret`
-4. Para producción, cambia `PAYPAL_MODE=production` y usa credenciales de producción
-
-### 4.2 MercadoPago
-
-1. Ve a [MercadoPago Developers](https://www.mercadopago.com/developers/)
-2. Crea una aplicación
-3. Copia tu `Access Token` (usa el de prueba para desarrollo)
-4. Para producción, usa el token de producción
+**Copia esta URL** para usarla en el frontend.
 
 ---
 
-## 🔄 Paso 5: Deploy Automático
+## 🌐 Paso 2: Desplegar Frontend en Vercel
 
-### 5.1 Configurar GitHub Actions (Opcional)
+### 2.1 Conectar Repositorio
 
-El archivo `.github/workflows/deploy.yml` ya está creado. Para que funcione completamente:
+1. Ve a [Vercel Dashboard](https://vercel.com/dashboard)
+2. Click en **"Add New Project"**
+3. Importa tu repositorio `ecopet-market`
+4. Configura el proyecto:
+   - **Framework Preset**: Next.js (detectado automáticamente)
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build` (automático)
+   - **Output Directory**: `.next` (automático)
 
-1. Vercel y Railway ya tienen integración con GitHub
-2. Cada push a `main` desplegará automáticamente en ambos servicios
-3. No necesitas configurar nada adicional si conectaste los repositorios correctamente
+### 2.2 Variables de Entorno
 
-### 5.2 Verificar Deploy
+En la configuración del proyecto, añade:
 
-```bash
-# Hacer un cambio y push
-git add .
-git commit -m "chore: initial deployment setup"
-git push origin main
+```
+NEXT_PUBLIC_API_URL=https://ecopet-market-backend-production.up.railway.app
 ```
 
-Verifica que:
-- ✅ Vercel despliega el frontend
-- ✅ Railway despliega el backend
-- ✅ Las URLs están correctamente configuradas
+> ⚠️ **Nota**: Usa la URL real de Railway que obtuviste en el paso 1.
+
+### 2.3 Deploy
+
+Vercel desplegará automáticamente. Obtendrás una URL como:
+`https://ecopet.vercel.app`
 
 ---
 
-## ✅ Checklist Final
+## 🔔 Paso 3: Configurar Webhooks
 
-- [ ] Repositorio en GitHub (privado)
-- [ ] Frontend desplegado en Vercel
-- [ ] Backend desplegado en Railway
-- [ ] Variables de entorno configuradas en ambos servicios
-- [ ] URLs actualizadas (frontend → backend, backend → frontend)
-- [ ] PayPal configurado (sandbox o producción)
-- [ ] MercadoPago configurado (test o producción)
-- [ ] Deploy automático funcionando
+### 3.1 PayPal Webhook
+
+1. Ve a [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/)
+2. Selecciona tu aplicación de producción
+3. Ve a **"Webhooks"**
+4. Click en **"Add Webhook"**
+5. Configura:
+   - **Webhook URL**: `https://TU-BACKEND-URL.railway.app/api/webhook/paypal`
+   - **Event Types**:
+     - `PAYMENT.CAPTURE.COMPLETED`
+     - `CHECKOUT.ORDER.APPROVED`
+
+### 3.2 MercadoPago Webhook
+
+1. Ve a [MercadoPago Developers](https://www.mercadopago.com/developers/)
+2. Selecciona tu aplicación de producción
+3. Ve a **"Webhooks"** o **"Notificaciones"**
+4. Click en **"Crear Webhook"**
+5. Configura:
+   - **URL**: `https://TU-BACKEND-URL.railway.app/api/webhook/mercadopago`
+   - **Eventos**: `payment`
+
+Ver guía detallada en [`WEBHOOKS_SETUP.md`](./WEBHOOKS_SETUP.md)
+
+---
+
+## ✅ Paso 4: Verificación
+
+### 4.1 Verificar Backend
+
+```bash
+# Health check
+curl https://TU-BACKEND-URL.railway.app/health
+
+# Productos
+curl https://TU-BACKEND-URL.railway.app/api/products
+```
+
+### 4.2 Verificar Frontend
+
+1. Abre la URL de Vercel en el navegador
+2. Verifica que la landing page carga
+3. Navega a `/products` y verifica el catálogo
+4. Selecciona un producto y verifica la página de detalle
+
+### 4.3 Probar Flujo de Compra
+
+1. Selecciona un producto
+2. Click en "Comprar con PayPal" o "Comprar con MercadoPago"
+3. Completa el pago en sandbox/test
+4. Verifica que redirige a `/checkout/[orderId]`
+5. Verifica que muestra `/success` con botón de descarga
+
+---
+
+## 🔄 Deploy Automático
+
+Una vez configurado, cada push a `main` desplegará automáticamente:
+- **Frontend**: Vercel detecta cambios y redeploya
+- **Backend**: Railway detecta cambios y redeploya
 
 ---
 
 ## 🐛 Troubleshooting
 
+### Backend no responde
+- Verifica que todas las variables de entorno estén configuradas
+- Revisa los logs de Railway
+- Verifica que el puerto sea 8080
+
 ### Frontend no se conecta al backend
-
-- Verifica que `NEXT_PUBLIC_API_URL` en Vercel apunte a la URL de Railway
+- Verifica que `NEXT_PUBLIC_API_URL` apunte a la URL correcta de Railway
 - Verifica que Railway esté corriendo y accesible
-- Revisa los logs en Railway
-
-### Errores de CORS
-
-- Verifica que `FRONTEND_URL` en Railway sea la URL correcta de Vercel
-- Asegúrate de que el backend tenga `cors` configurado (ya está incluido)
+- Revisa la consola del navegador para errores
 
 ### Pagos no funcionan
-
 - Verifica que las credenciales de PayPal/MercadoPago sean correctas
 - Usa modo sandbox/test para desarrollo
 - Revisa los logs del backend en Railway
 
 ---
 
-## 📞 Soporte
-
-Si tienes problemas, revisa:
-- Logs en Vercel Dashboard
-- Logs en Railway Dashboard
-- Console del navegador (F12)
-- Network tab para ver requests
-
----
-
-¡Listo! Tu tienda online está desplegada y lista para vender productos digitales globalmente. 🎉
+**Última actualización**: Febrero 2026

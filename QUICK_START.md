@@ -1,111 +1,139 @@
 # ⚡ Inicio Rápido - EcoPet Market
 
-## ✅ Estado del Proyecto
-
-Tu tienda online **EcoPet Market** está completamente desarrollada y lista para desplegar.
-
-### 📦 Lo que se ha creado:
-
-✅ **Frontend (Next.js)**
-- Landing page emocional con diseño verde/azul
-- Catálogo de productos
-- Páginas individuales de producto
-- Página de contacto
-- Página de confirmación de compra
-- Integración con backend para pagos
-
-✅ **Backend (Express)**
-- API REST con productos mock
-- Integración PayPal
-- Integración MercadoPago
-- Sistema de confirmación de pagos
-- Entrega de productos digitales
-
-✅ **Configuración**
-- Archivos `.env.example` en ambos proyectos
-- README.md completo
-- Guía de despliegue (DEPLOY.md)
-- GitHub Actions workflow
-- .gitignore configurado
-
-✅ **Productos Iniciales**
-1. Guía natural para el cuidado de perros - $9.99
-2. Calendario de vacunas para gatos - $4.99
-3. Plantilla editable de salud veterinaria - $7.49
+Guía rápida para desarrolladores nuevos.
 
 ---
 
-## 🚀 Próximos Pasos
+## 🚀 Setup Local (5 minutos)
 
-### 1. Probar Localmente
+### 1. Clonar Repositorio
 
-**Frontend:**
 ```bash
-cd frontend
-npm install
-cp env.example .env.local
-# Edita .env.local: NEXT_PUBLIC_API_URL=http://localhost:4000
-npm run dev
+git clone https://github.com/GodinesCrazy/ecopet-market.git
+cd ecopet-market
 ```
 
-**Backend:**
+### 2. Backend
+
 ```bash
 cd backend
 npm install
 cp env.example .env
-# Edita .env con tus claves (puedes usar valores de prueba)
+# Edita .env con tus credenciales (puedes usar valores de prueba)
 npm start
 ```
 
-Abre http://localhost:3000
+Backend corriendo en: `http://localhost:8080`
 
-### 2. Conectar a GitHub
+### 3. Frontend
 
 ```bash
-# Crea un repositorio privado en GitHub llamado "ecopet-market"
-git remote add origin https://github.com/TU_USUARIO/ecopet-market.git
-git push -u origin main
+cd frontend
+npm install
+cp env.example .env.local
+# Edita .env.local: NEXT_PUBLIC_API_URL=http://localhost:8080
+npm run dev
 ```
 
-### 3. Desplegar
-
-Sigue las instrucciones detalladas en **DEPLOY.md**:
-
-1. **Vercel** (Frontend)
-   - Conecta el repo
-   - Root: `frontend/`
-   - Variable: `NEXT_PUBLIC_API_URL` (la obtendrás de Railway)
-
-2. **Railway** (Backend)
-   - Conecta el repo
-   - Root: `backend/`
-   - Configura todas las variables de entorno
-   - Copia la URL y actualiza Vercel
-
-### 4. Configurar Pagos
-
-- **PayPal**: Obtén credenciales en https://developer.paypal.com/
-- **MercadoPago**: Obtén access token en https://www.mercadopago.com/developers/
-
-Usa modo **sandbox/test** para desarrollo.
+Frontend corriendo en: `http://localhost:3000`
 
 ---
 
-## 📝 Notas Importantes
+## 📝 Comandos Útiles
 
-- Los productos usan URLs de descarga de ejemplo. Reemplázalas con enlaces reales en producción.
-- El flujo de pago está simplificado. En producción, implementa webhooks de PayPal/MercadoPago.
-- Las imágenes usan Unsplash. Considera usar tus propias imágenes en producción.
+### Backend
+
+```bash
+npm start          # Inicia servidor
+npm run dev        # Modo desarrollo con watch
+```
+
+### Frontend
+
+```bash
+npm run dev        # Servidor de desarrollo
+npm run build      # Build de producción
+npm start          # Servidor de producción
+npm run lint       # Linter
+```
 
 ---
 
-## 🎯 Resultado Final
+## 🧪 Probar Localmente
 
-Una tienda online completamente funcional:
-- ✅ Diseño moderno y emocional
-- ✅ Catálogo de productos
-- ✅ Sistema de pagos (PayPal + MercadoPago)
-- ✅ Entrega automática de productos digitales
-- ✅ Lista para generar ingresos pasivos
+1. Abre `http://localhost:3000`
+2. Navega a `/products`
+3. Selecciona un producto
+4. Click en "Comprar" (usará sandbox/test)
 
-¡Éxito con tu tienda! 🐾
+---
+
+## 📦 Estructura de Archivos Clave
+
+```
+backend/
+├── server.js              # Punto de entrada
+├── routes/
+│   ├── products.js        # GET /api/products
+│   └── payments.js        # POST /api/create-order/*
+├── controllers/           # Lógica de negocio
+├── middlewares/           # Validación y logging
+└── data/
+    └── products.json      # Catálogo de productos
+
+frontend/
+├── src/
+│   ├── app/               # Páginas (App Router)
+│   │   ├── page.tsx       # Landing
+│   │   ├── products/      # Catálogo
+│   │   ├── product/[id]/  # Detalle producto
+│   │   ├── checkout/      # Confirmación
+│   │   └── success/       # Descarga
+│   └── components/        # Componentes reutilizables
+```
+
+---
+
+## 🔧 Variables de Entorno Mínimas
+
+### Backend (.env)
+```env
+PORT=8080
+FRONTEND_URL=http://localhost:3000
+PAYPAL_CLIENT_ID=tu_client_id_sandbox
+PAYPAL_CLIENT_SECRET=tu_client_secret_sandbox
+PAYPAL_MODE=sandbox
+MERCADOPAGO_ACCESS_TOKEN=tu_access_token_test
+```
+
+### Frontend (.env.local)
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080
+```
+
+---
+
+## 🐛 Problemas Comunes
+
+**Backend no inicia**
+- Verifica que el puerto 8080 esté libre
+- Verifica que las dependencias estén instaladas
+
+**Frontend no carga productos**
+- Verifica que el backend esté corriendo
+- Verifica `NEXT_PUBLIC_API_URL` en `.env.local`
+
+**Errores de CORS**
+- Verifica que `FRONTEND_URL` en backend apunte a `http://localhost:3000`
+
+---
+
+## 📚 Más Información
+
+- [`README.md`](./README.md) - Documentación completa
+- [`DEPLOY.md`](./DEPLOY.md) - Guía de despliegue
+- [`PRODUCTS.md`](./PRODUCTS.md) - Catálogo de productos
+
+---
+
+**Tiempo estimado de setup**: 5-10 minutos
