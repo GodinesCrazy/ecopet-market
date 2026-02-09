@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -32,8 +33,15 @@ export default function RootLayout({
         <div className="flex min-h-screen flex-col">
           <header className="border-b border-slate-200 bg-white">
             <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
-              <Link href="/" className="text-lg font-semibold text-emerald-700">
-                EcoPet Market
+              <Link href="/" className="flex items-center gap-3">
+                <Image
+                  src="/logo.svg"
+                  alt="EcoPet Market Logo"
+                  width={120}
+                  height={36}
+                  priority
+                  className="h-9 w-auto"
+                />
               </Link>
               <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
                 <Link href="/catalog">Catálogo</Link>

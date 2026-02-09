@@ -20,6 +20,15 @@ function client() {
 export async function createPayPalOrder(req, res) {
   try {
     const { productId } = req.query || req.body;
+    
+    // Validación básica
+    if (!productId || typeof productId !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID is required",
+      });
+    }
+    
     const product = products.find((p) => p.id === productId);
 
     if (!product) {
