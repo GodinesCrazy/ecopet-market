@@ -37,10 +37,10 @@ export default function RootLayout({
                 <Image
                   src="/logo.svg"
                   alt="EcoPet Market Logo"
-                  width={120}
-                  height={36}
+                  width={160}
+                  height={60}
                   priority
-                  className="h-9 w-auto"
+                  className="h-12 w-auto md:h-14"
                 />
               </Link>
               <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
