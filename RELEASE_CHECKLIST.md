@@ -7,8 +7,8 @@
 | Vista individual redirige correctamente                | ✅ Completado |
 | Flujo de compra redirige a PayPal y MercadoPago        | ✅ Completado |
 | Página de confirmación de compra funcional             | ✅ Completado |
-| Descarga disponible post-pago                          | 🔲 Pendiente (requiere enlaces reales) |
-| Webhooks configurados en dashboards externos           | 🔲 Pendiente |
+| Descarga disponible post-pago                          | 🔲 Pendiente (ver FINAL_STEPS_GUIDE.md) |
+| Webhooks configurados en dashboards externos           | 🔲 Pendiente (ver FINAL_STEPS_GUIDE.md) |
 | README + DEPLOY + QUICK_START actualizados             | ✅ Completado |
 | Verificación visual y UX por fundador                  | ✅ Aprobado (feedback logo aplicado) |
 | Tag y commit de release v1.0.0 en Git                  | ✅ Completado |
